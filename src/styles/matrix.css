@@ -1,0 +1,25 @@
+.matrix-row {
+  padding-top: 1px;
+}
+
+.matrix-column {
+  padding-top: 1px;
+}
+
+.matrix-cell-side {
+  padding-top: 30px;
+}
+
+.matrix-cell-center-top {
+  text-align: center;
+
+}
+
+.matrix-cell-center-bottom {
+  text-align: center;
+  padding-top: 40px;
+}
+
+.ui.three.column.grid {
+  height: 100px;
+}

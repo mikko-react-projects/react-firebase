@@ -1,0 +1,19 @@
+.tail-datetime-calendar .calendar-navi {
+  text-align: center;
+  height: 50px;
+}
+
+.tail-datetime-calendar .calendar-date {
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+.tail-datetime-calendar .calendar-date table thead tr > *{
+    width: 14%;
+}
+.tail-datetime-calendar .calendar-date table tbody tr > * {
+  height: 80px;
+  padding: 5px;
+  text-align: left;
+  vertical-align: top;
+}
