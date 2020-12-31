@@ -6,7 +6,6 @@ class Board {
   constructor(p1, p2) {
     this.p1 = p1;
     this.p2 = p2;
-    this.training = false;
     this.totalGames = 0;
     this.current = this.p1;
     this.resetBoard();
@@ -143,11 +142,9 @@ class Board {
   }
 
   trainComputer() {
-    if (!this.training) {
-      this.training = true;
+    if (!this.p1.getIsComputer()) {
       this.p1.setIsComputer(true);
     } else {
-      this.training = false;
       this.p1.setIsComputer(false);
     }
     this.resetBoard();
