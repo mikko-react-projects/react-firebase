@@ -66,15 +66,6 @@ class Board {
     }
   }
 
-  sleep() {
-    return new Promise(resolve => setTimeout(resolve, 5));
-  }
-
-  async delayedComputerTurn() {
-    await this.sleep();
-    this.ComputerTurn();
-  }
-
   reset(result) {
     this.resetBoard();
     if (result === this.p1.getValue()) {
@@ -96,14 +87,14 @@ class Board {
     total.innerHTML = '';
     let t = document.createTextNode(this.totalGames);
     total.appendChild(t);
-    this.updateBoard();
-    if (this.totalGames % 2 === 0) {
-      this.current = this.p2;
-    } else {
-      this.current = this.p1;
-    }
-    if (this.current.getIsComputer()) {
-      this.delayedComputerTurn();
+    if (!this.training) {
+      this.updateBoard();
+      if (this.totalGames % 2 === 0) {
+        this.current = this.p2;
+        this.ComputerTurn();
+      } else {
+        this.current = this.p1;
+      }
     }
   }
 
@@ -118,7 +109,7 @@ class Board {
   onClickSquare(uid) {
     let sqr = document.getElementById(uid);
     if (sqr.textContent) {
-      return;
+       return;
     };
     let coords = uid.split('');
     this.board[coords[0]][coords[2]] = this.current.getValue();
@@ -142,17 +133,24 @@ class Board {
     }
   }
 
-  trainComputer() {
-    if (!this.training) {
-      this.training = true;
-      this.p1.setIsComputer(true);
-    } else {
-      this.training = false;
-      this.p1.setIsComputer(false);
+  improveComputer() {
+    this.training = true;
+    let playerToMove = this.p1;
+    for (let i = 0; i < 10000; i++) {
+      while (this.getGameResult() === ENUMS.NOT_ENDED) {
+        let actions = this.getActions();
+        let action = playerToMove.move(actions, this.getBoardCopy());
+        this.move(action, playerToMove.getValue());
+        if (playerToMove === this.p1) {
+          playerToMove = this.p2;
+        } else {
+          playerToMove = this.p1;
+        }
+      }
+      this.reset(this.getGameResult());
     }
     this.resetBoard();
-    this.updateBoard();
-    this.nextPlayer();
+    this.training = false;
   }
 
   updateBoard() {
@@ -173,10 +171,6 @@ class Board {
 
   getBoardCopy() {
     return [...this.board];
-  }
-
-  getTraining() {
-    return this.training;
   }
 
   renderSquares() {

@@ -24,6 +24,10 @@ class Player {
     return this.isComputer;
   }
 
+  setIsComputer(val) {
+    this.isComputer = val;
+  }
+
   move(actions, board) {
     return this.q.action(actions, board, this.value);
   }
