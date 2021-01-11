@@ -1,7 +1,7 @@
 import { flatten } from 'lodash';
 import { ENUMS } from './Constants';
 
-class Player {
+class QPlayer {
   constructor(value, isComputer) {
     this.value = value;
     this.wins = 0;
@@ -86,4 +86,4 @@ class Player {
   }
 }
 
-export default Player;
+export default QPlayer;
