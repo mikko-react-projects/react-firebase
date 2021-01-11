@@ -1,13 +1,13 @@
 import React from 'react';
-import Player from './Player';
+import QPlayer from './QPlayer';
 import { ENUMS } from './Constants';
 import Board from './Board';
 import TrainingButton from './TrainingButton';
 
 const TictactoeComponent = () => {
 
-  let p1 = new Player(ENUMS.X_VAL, false);
-  let p2 = new Player(ENUMS.O_VAL, true);
+  let p1 = new QPlayer(ENUMS.X_VAL, false);
+  let p2 = new QPlayer(ENUMS.O_VAL, true);
   let board = new Board(p1, p2);
 
   let squares = board.renderSquares();
